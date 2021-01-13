@@ -1,5 +1,10 @@
 package com.cyj.piano_backend.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class JsonResult<T> {
 
     private int code;
@@ -20,33 +25,23 @@ public class JsonResult<T> {
         this.info = info;
     }
 
-    public JsonResult(int code, T info) {
-        this.code = code;
-        this.info = info;
+    //查询成功
+    public static <T> JsonResult<T> cx_success(T info) {
+        return new JsonResult<>(200, "获取数据成功", info);
     }
 
-    public int getCode() {
-        return code;
+    //保存成功
+    public static <T> JsonResult<T> bc_success(T info) {
+        return new JsonResult<>(200, "数据提交成功", info);
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    //查询失败
+    public static <T> JsonResult<T> cx_fail(T info) {
+        return new JsonResult<>(200, "获取数据失败", info);
     }
 
-    public String getMsg() {
-        return msg;
+    //保存失败
+    public static <T> JsonResult<T> bc_fail(T info) {
+        return new JsonResult<>(200, "数据提交失败", info);
     }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getInfo() {
-        return info;
-    }
-
-    public void setInfo(T info) {
-        this.info = info;
-    }
-
 }
