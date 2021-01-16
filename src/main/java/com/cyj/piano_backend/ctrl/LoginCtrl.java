@@ -8,6 +8,7 @@ import cn.hutool.json.JSONUtil;
 import com.cyj.piano_backend.bean.JsonResult;
 import com.cyj.piano_backend.constants.Contants;
 import com.cyj.piano_backend.util.AES;
+import com.cyj.piano_backend.util.MiniAESUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,14 +64,22 @@ public class LoginCtrl {
     @PostMapping("/decodeUserInfo")
     @ApiOperation(value = "解密encryptedData", httpMethod = "POST")
     public JsonResult<String> decodeUserInfo(@RequestBody Map<String, String> params) throws Exception {
-        byte[] iv = Base64.decode(params.get("iv"));//偏移量
-        byte[] encryptedData = Base64.decode(params.get("encryptedData"));//加密个人信息
-        byte[] third_session = Base64.decode(params.get("thirdSession"));//登录态
+//        byte[] iv = Base64.decode(params.get("iv"));//偏移量
+//        byte[] encryptedData = Base64.decode(params.get("encryptedData"));//加密个人信息
+//        byte[] third_session = Base64.decode(params.get("thirdSession"));//登录态
+        String iv = params.get("iv");
+        String encryptedData = params.get("encryptedData");
+        String thirdSession = params.get("thirdSession");
         //根据third_session从缓存中获取session_key
         //从缓存中获取session_key
 
-        byte[] resultByte = AES.decrypt(Base64.decode(encryptedData), Base64.decode(third_session), AES.generateIV(iv));
-        System.out.println(resultByte);
+//        byte[] resultByte = AES.decrypt(Base64.decode(encryptedData), Base64.decode(third_session), AES.generateIV(iv));
+//        System.out.println(Arrays.toString(resultByte));
+
+        String json = MiniAESUtil.getUserInfo(encryptedData, thirdSession, iv);
+        String wxDecrypt = MiniAESUtil.wxDecrypt(encryptedData, thirdSession, iv);
+        System.out.println(json);
+        System.out.println(wxDecrypt);
         return new JsonResult<>(200, "解密成功");
     }
 
