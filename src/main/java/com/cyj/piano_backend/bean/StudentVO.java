@@ -8,7 +8,7 @@ import lombok.*;
  */
 @Getter
 @Setter
-public class BabyVO extends BaseVO{
+public class StudentVO extends BaseVO {
 
     private String id;
     private String babyName;

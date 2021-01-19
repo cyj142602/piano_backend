@@ -16,9 +16,7 @@ public class BaseVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String createUserId;
     private Date createTime;
-    private String updateUserId;
     private Date updateTime;
 
 

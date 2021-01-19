@@ -48,15 +48,13 @@ public class LoginCtrl {
         String result = HttpUtil.get(loginUrl, paramsMap);
         JSONObject jsonObject = JSONUtil.parseObj(result);
         //微信记录的登录态，建议加密后返回给小程序端存储，后续用加密后的密文通过服务器获取用户登录信息
-        String session_key = (String) jsonObject.get("session_key");
+        String sessionKey = (String) jsonObject.get("session_key");
         //本小程序中每个用户的唯一id
-        String openid = (String) jsonObject.get("openid");
-        System.out.println(jsonObject);
-        String third_session = new MD5().digestHex16(session_key);
+        String openId = (String) jsonObject.get("openid");
+        String thirdSession = new MD5().digestHex16(sessionKey);
         //openid session_key third_session 存数据库缓存 记录登录态
         //目前没有数据库存储，先传session_key
-//        return new JsonResult<>(200, "登录成功", third_session);
-        return new JsonResult<>(200, "登录获取成功", session_key);
+        return new JsonResult<>(200, "登录获取成功", thirdSession);
     }
 
     @PostMapping("/decodeUserInfo")

@@ -1,6 +1,6 @@
 package com.cyj.piano_backend.ctrl;
 
-import com.cyj.piano_backend.bean.BabyVO;
+import com.cyj.piano_backend.bean.StudentVO;
 import com.cyj.piano_backend.bean.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,17 +21,17 @@ public class BabyCtrl {
 
     @ApiOperation(value = "宝贝列表", httpMethod = "POST")
     @RequestMapping(value = "/getBabyList")
-    public JsonResult<List<BabyVO>> getBabyList(){
+    public JsonResult<List<StudentVO>> getBabyList(){
         log.info("查看宝贝列表");
-        List<BabyVO> list = new ArrayList<>();
-        BabyVO babyVO = new BabyVO();
+        List<StudentVO> list = new ArrayList<>();
+        StudentVO babyVO = new StudentVO();
         babyVO.setAge(5);
         babyVO.setBabyName("兜兜");
         babyVO.setGender(1);
         babyVO.setPhoto("abc");
         babyVO.setId("1");
         list.add(babyVO);
-        BabyVO babyVO1 = new BabyVO();
+        StudentVO babyVO1 = new StudentVO();
         babyVO1.setAge(5);
         babyVO1.setBabyName("妞妞");
         babyVO1.setGender(2);
