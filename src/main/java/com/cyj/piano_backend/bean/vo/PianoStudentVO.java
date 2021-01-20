@@ -1,4 +1,4 @@
-package com.cyj.piano_backend.bean;
+package com.cyj.piano_backend.bean.vo;
 
 import lombok.*;
 
@@ -8,11 +8,10 @@ import lombok.*;
  */
 @Getter
 @Setter
-public class StudentVO extends BaseVO {
+public class PianoStudentVO extends BaseVO {
 
-    private String id;
     private String babyName;
-    private Integer gender;
+    private Integer gender;//1男2女
     private String photo;
     private Integer age;
 

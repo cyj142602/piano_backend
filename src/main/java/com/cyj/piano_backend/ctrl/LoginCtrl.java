@@ -1,32 +1,21 @@
 package com.cyj.piano_backend.ctrl;
 
-import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.digest.MD5;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.cyj.piano_backend.bean.JsonResult;
+import com.cyj.piano_backend.bean.po.PianoUserPO;
+import com.cyj.piano_backend.bean.vo.JsonResult;
 import com.cyj.piano_backend.constants.Contants;
-import com.cyj.piano_backend.util.AES;
+import com.cyj.piano_backend.service.PianoUserService;
 import com.cyj.piano_backend.util.MiniAESUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,8 +28,11 @@ public class LoginCtrl {
 
     private Logger logger = LoggerFactory.getLogger(LoginCtrl.class);
 
+    @Autowired
+    private PianoUserService pianoUserService;
+
     @GetMapping("/getThirdSession")
-    @ApiOperation(value = "登录获取thirdSession", httpMethod = "GET")
+    @ApiOperation(value = "登录获取thirdSession")
     public JsonResult<String> getLoginUser(@RequestParam String code) {
         String loginUrl = Contants.BASE_URL + Contants.LOGIN_URL;
         Map<String, Object> paramsMap = new HashMap<>();
@@ -53,6 +45,14 @@ public class LoginCtrl {
         String sessionKey = (String) jsonObject.get("session_key");
         //本小程序中每个用户的唯一id
         String openId = (String) jsonObject.get("openid");
+        PianoUserPO po = new PianoUserPO();
+        po.setId("132");
+        po.setGender(1);
+        po.setNickName("nickName");
+        po.setOpenId(openId);
+        po.setPermission(1);
+        po.setPhone("13366820303");
+        pianoUserService.insert(po);
         String thirdSession = new MD5().digestHex16(sessionKey);
         //openid session_key third_session 存数据库缓存 记录登录态
         //目前没有数据库存储，先传session_key
@@ -60,7 +60,7 @@ public class LoginCtrl {
     }
 
     @PostMapping("/decodeUserInfo")
-    @ApiOperation(value = "解密encryptedData", httpMethod = "POST")
+    @ApiOperation(value = "解密encryptedData")
     public JsonResult<String> decodeUserInfo(@RequestBody Map<String, String> params) throws Exception {
 //        byte[] iv = Base64.decode(params.get("iv"));//偏移量
 //        byte[] encryptedData = Base64.decode(params.get("encryptedData"));//加密个人信息

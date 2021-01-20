@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyj.piano_backend.mapper.PianoUserMapper">
+
+    <insert id="insert" parameterType="com.cyj.piano_backend.bean.po.PianoUserPO">
+        insert into PIANO_USER
+        values (#{id,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
+                #{gender,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{permission,jdbcType=INTEGER}, now(), now())
+    </insert>
+</mapper>

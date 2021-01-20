@@ -1,0 +1,64 @@
+#\u6587\u4EF6\u5730\u5740
+cyj:
+  filePath: D:/fileUpload
+#\u4FEE\u6539springboot\u5185\u7F6Etomcat\u9650\u5236\u7684\u6587\u4EF6\u5927\u5C0F
+spring:
+  application:
+    name: piano_backend
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: jdbc:dm://localhost:5236
+    username: PIANO_BACKEND
+    password: PIANO_BACKEND
+    initial-size: 2
+    min-idle: 2
+    max-active: 20
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    use-global-data-source-stat: true
+    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 5
+    #lettuce:
+    jedis:
+      pool:
+        max-active: 1024
+        max-wait: -1
+        max-idle: 50
+        min-idle: 0
+
+pagehelper:
+  helperDialect: oracle
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+server:
+  port: 8080
+  servlet:
+    context-path: /piano_backend
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.cyj.piano_backend.mapper: debug
+    io.swagger.models.parameters.AbstractSerializableParameter: error
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    call-setters-on-nulls: true
