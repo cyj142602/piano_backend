@@ -1,5 +1,6 @@
 package com.cyj.piano_backend.ctrl;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.MD5;
 import cn.hutool.http.HttpUtil;
@@ -10,7 +11,6 @@ import com.cyj.piano_backend.bean.vo.JsonResult;
 import com.cyj.piano_backend.constants.Contants;
 import com.cyj.piano_backend.service.PianoUserService;
 import com.cyj.piano_backend.util.MiniAESUtil;
-import com.cyj.piano_backend.util.MyUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -61,7 +61,7 @@ public class LoginCtrl {
                 String userInfo = MiniAESUtil.getUserInfo(encryptedData, sessionKey, iv);
                 JSONObject json = JSONUtil.parseObj(userInfo);
                 PianoUserPO po = new PianoUserPO();
-                userId = MyUtil.uuid();
+                userId = IdUtil.fastSimpleUUID();
                 po.setId(userId);
                 po.setGender((Integer) json.get("gender"));
                 po.setNickName((String) json.get("nickName"));
