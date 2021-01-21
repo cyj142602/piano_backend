@@ -65,7 +65,7 @@ public class DataSource {
      * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
     @Bean(name = "transactionManager")
-    public PlatformTransactionManager oaTransactionManager(@Qualifier("primaryDataSource") javax.sql.DataSource dataSource) {
+    public PlatformTransactionManager transactionManager(@Qualifier("primaryDataSource") javax.sql.DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
@@ -78,8 +78,8 @@ public class DataSource {
      * @throws Exception
      * @history 修订历史（历次修订内容、修订人、修订时间等）
      */
-    @Bean(name = "oaSqlSessionTemplate")
-    public SqlSessionTemplate oaSqlSessionTemplate(@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = "sqlSessionTemplate")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

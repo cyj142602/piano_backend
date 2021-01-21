@@ -18,4 +18,5 @@ public class BasePO implements Serializable {
     private String id;
     private Date createTime;
     private Date updateTime;
+    private Integer delFlag;
 }

@@ -5,6 +5,10 @@
     <insert id="insert" parameterType="com.cyj.piano_backend.bean.po.PianoUserPO">
         insert into PIANO_USER
         values (#{id,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
-                #{gender,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{permission,jdbcType=INTEGER}, now(), now())
+                #{gender,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{permission,jdbcType=INTEGER}, now(), now(),'0')
     </insert>
+
+    <select id="selectByOpenId" resultType="String">
+        select ID from PIANO_USER where OPEN_ID = #{openId,jdbcType=VARCHAR} and DEL_FLAG = '0'
+    </select>
 </mapper>
