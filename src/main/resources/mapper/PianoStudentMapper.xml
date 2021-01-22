@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyj.piano_backend.mapper.PianoStudentMapper">
+
+    <resultMap id="baseMap" type="com.cyj.piano_backend.bean.vo.PianoStudentVO">
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="pianoUserId" column="PIANO_USER_ID" jdbcType="VARCHAR"/>
+        <result property="studentName" column="STUDENT_NAME" jdbcType="VARCHAR"/>
+        <result property="gender" column="GENDER" jdbcType="INTEGER"/>
+        <result property="age" column="AGE" jdbcType="INTEGER"/>
+        <result property="photo" column="PHOTO" jdbcType="VARCHAR"/>
+        <result property="nickName" column="NICK_NAME" jdbcType="VARCHAR"/>
+        <result property="birthday" column="BIRTHDAY" jdbcType="TIMESTAMP"/>
+        <result property="calendar" column="CALENDAR" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getStudentList" resultMap="baseMap" parameterType="string">
+        select ID,
+               PIANO_USER_ID,
+               STUDENT_NAME,
+               GENDER,
+               AGE,
+               PHOTO,
+               NICK_NAME,
+               BIRTHDAY,
+               CALENDAR
+        from PIANO_STUDENT
+        where PIANO_USER_ID = #{userId,jdbcType=VARCHAR}
+          and DEL_FLAG = '0'
+    </select>
+</mapper>

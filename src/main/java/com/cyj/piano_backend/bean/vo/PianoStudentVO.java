@@ -10,9 +10,15 @@ import lombok.*;
 @Setter
 public class PianoStudentVO extends BaseVO {
 
-    private String babyName;
+    private String studentName;
     private Integer gender;//1男2女
     private String photo;
     private Integer age;
+    private String pianoUserId;
+    private String nickName;
+
+    private String birthday;
+    private String calendar;
+
 
 }

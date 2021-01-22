@@ -14,5 +14,5 @@ public class PianoUserPO extends BasePO {
     private String nickName;
     private Integer gender;
     private String phone;
-    private Integer permission;
+    private Integer permission;//0 默认 1 申请 2学生家长
 }

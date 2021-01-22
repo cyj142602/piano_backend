@@ -9,10 +9,12 @@ import cn.hutool.json.JSONUtil;
 import com.cyj.piano_backend.bean.po.PianoUserPO;
 import com.cyj.piano_backend.bean.vo.JsonResult;
 import com.cyj.piano_backend.constants.Contants;
+import com.cyj.piano_backend.redis.RedisBaseDao;
 import com.cyj.piano_backend.service.PianoUserService;
 import com.cyj.piano_backend.util.MiniAESUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +28,14 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "登录接口")
+@Slf4j
 public class LoginCtrl {
-
-    private Logger logger = LoggerFactory.getLogger(LoginCtrl.class);
 
     @Autowired
     private PianoUserService pianoUserService;
+
+    @Autowired
+    private RedisBaseDao redisBaseDao;
 
     @PostMapping("/getThirdSession")
     @ApiOperation(value = "登录获取thirdSession")
@@ -50,6 +54,7 @@ public class LoginCtrl {
             String sessionKey = (String) jsonObject.get("session_key");
             //sessionKey加密存储，并返给小程序端
             String thirdSession = new MD5().digestHex16(sessionKey);
+            redisBaseDao.setString("thirdSession",thirdSession);
             result.put("thirdSession", thirdSession);
             //本小程序中每个用户的唯一id
             String openId = (String) jsonObject.get("openid");
@@ -69,11 +74,11 @@ public class LoginCtrl {
                 pianoUserService.insert(po);
             }
             result.put("userId", userId);
-            logger.info("登录成功");
+            log.info("登录成功");
             return new JsonResult<>(200, "登录成功", result);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("登陆失败，e={}", e.getMessage());
+            log.error("登陆失败，e={}", e.getMessage());
             return new JsonResult<>(500, e.getMessage());
         }
     }
