@@ -1,17 +1,17 @@
 package com.cyj.piano_backend.ctrl;
 
-import com.cyj.piano_backend.bean.vo.PianoStudentVO;
-import com.cyj.piano_backend.bean.vo.JsonResult;
+import com.cyj.piano_backend.bean.PianoStudent;
+import com.cyj.piano_backend.bean.JsonResult;
 import com.cyj.piano_backend.service.PianoStudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,10 +26,10 @@ public class PianoStudentCtrl {
     private PianoStudentService pianoStudentService;
 
     @ApiOperation(value = "学生列表")
-    @PostMapping(value = "/getBabyList")
-    public JsonResult<List<PianoStudentVO>> getStudentList(@RequestParam String userId) {
+    @PostMapping(value = "/getStudentList")
+    public JsonResult<List<PianoStudent>> getStudentList(@RequestParam String userId) {
         log.info("查看学生列表");
-        List<PianoStudentVO> list;
+        List<PianoStudent> list;
         try {
             list = pianoStudentService.getStudentList(userId);
             log.info("学生列表查询成功");
@@ -39,6 +39,19 @@ public class PianoStudentCtrl {
             log.error("列表查询失败，e={}", e.getMessage());
             return new JsonResult<>(500, e.getMessage());
         }
+    }
 
+    @ApiOperation(value = "添加学生")
+    @PostMapping(value = "/saveStudentInfo")
+    public JsonResult<String> saveStudentInfo(@RequestBody PianoStudent pianoStudent) {
+        log.info("添加学生");
+        try {
+            pianoStudentService.saveStudentInfo(pianoStudent);
+            return JsonResult.bc_success("");
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("添加学生信息失败，e={}", e.getMessage());
+            return new JsonResult<>(500, e.getMessage());
+        }
     }
 }

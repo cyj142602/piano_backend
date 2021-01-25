@@ -1,6 +1,6 @@
 package com.cyj.piano_backend.mapper;
 
-import com.cyj.piano_backend.bean.po.PianoUserPO;
+import com.cyj.piano_backend.bean.PianoUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PianoUserMapper {
 
     //新增用户
-    void insert(PianoUserPO po);
+    void insert(PianoUser po);
 
     //查询用户
     String selectByOpenId(String openId);

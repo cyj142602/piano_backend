@@ -1,6 +1,6 @@
 package com.cyj.piano_backend.mapper;
 
-import com.cyj.piano_backend.bean.vo.PianoStudentVO;
+import com.cyj.piano_backend.bean.PianoStudent;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,5 +11,7 @@ import java.util.List;
 @Mapper
 public interface PianoStudentMapper {
 
-    List<PianoStudentVO> getStudentList(String userId);
+    List<PianoStudent> getStudentList(String userId);
+
+    void saveStudentInfo(PianoStudent pianoStudent);
 }

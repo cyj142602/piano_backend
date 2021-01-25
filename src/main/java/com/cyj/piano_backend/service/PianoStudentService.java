@@ -1,6 +1,6 @@
 package com.cyj.piano_backend.service;
 
-import com.cyj.piano_backend.bean.vo.PianoStudentVO;
+import com.cyj.piano_backend.bean.PianoStudent;
 
 import java.util.List;
 
@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface PianoStudentService {
 
-    List<PianoStudentVO> getStudentList(String userId);
+    List<PianoStudent> getStudentList(String userId);
+
+    void saveStudentInfo(PianoStudent pianoStudent);
 }

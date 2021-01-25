@@ -1,4 +1,4 @@
-package com.cyj.piano_backend.bean.po;
+package com.cyj.piano_backend.bean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PianoUserPO extends BasePO {
+public class PianoUser extends BaseObject {
 
     private String openId;
     private String nickName;

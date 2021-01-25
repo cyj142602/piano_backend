@@ -6,8 +6,8 @@ import cn.hutool.crypto.digest.MD5;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.cyj.piano_backend.bean.po.PianoUserPO;
-import com.cyj.piano_backend.bean.vo.JsonResult;
+import com.cyj.piano_backend.bean.PianoUser;
+import com.cyj.piano_backend.bean.JsonResult;
 import com.cyj.piano_backend.constants.Contants;
 import com.cyj.piano_backend.redis.RedisBaseDao;
 import com.cyj.piano_backend.service.PianoUserService;
@@ -15,8 +15,6 @@ import com.cyj.piano_backend.util.MiniAESUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,7 +63,7 @@ public class LoginCtrl {
                 String encryptedData = params.get("encryptedData");
                 String userInfo = MiniAESUtil.getUserInfo(encryptedData, sessionKey, iv);
                 JSONObject json = JSONUtil.parseObj(userInfo);
-                PianoUserPO po = new PianoUserPO();
+                PianoUser po = new PianoUser();
                 userId = IdUtil.fastSimpleUUID();
                 po.setId(userId);
                 po.setGender((Integer) json.get("gender"));

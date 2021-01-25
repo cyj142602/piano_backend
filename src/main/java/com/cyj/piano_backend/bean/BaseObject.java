@@ -1,4 +1,4 @@
-package com.cyj.piano_backend.bean.vo;
+package com.cyj.piano_backend.bean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +11,12 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class BaseVO implements Serializable {
+public class BaseObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private String id;
     private Date createTime;
     private Date updateTime;
-
-
+    private Integer delFlag;
 }

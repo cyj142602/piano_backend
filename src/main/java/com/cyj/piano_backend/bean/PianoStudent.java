@@ -1,6 +1,8 @@
-package com.cyj.piano_backend.bean.vo;
+package com.cyj.piano_backend.bean;
 
 import lombok.*;
+
+import java.util.Date;
 
 
 /**
@@ -8,7 +10,7 @@ import lombok.*;
  */
 @Getter
 @Setter
-public class PianoStudentVO extends BaseVO {
+public class PianoStudent extends BaseObject {
 
     private String studentName;
     private Integer gender;//1男2女
@@ -17,8 +19,8 @@ public class PianoStudentVO extends BaseVO {
     private String pianoUserId;
     private String nickName;
 
-    private String birthday;
-    private String calendar;
+    private Date birthday;
+    private Integer calendar;
 
 
 }

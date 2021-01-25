@@ -1,6 +1,6 @@
 package com.cyj.piano_backend.service;
 
-import com.cyj.piano_backend.bean.po.PianoUserPO;
+import com.cyj.piano_backend.bean.PianoUser;
 
 /**
  * @author changyingjie
@@ -8,7 +8,7 @@ import com.cyj.piano_backend.bean.po.PianoUserPO;
 public interface PianoUserService {
 
     //新增用户
-    void insert(PianoUserPO po);
+    void insert(PianoUser po);
 
     //查询用户
     String selectByOpenId(String openId);

@@ -1,6 +1,6 @@
 package com.cyj.piano_backend.service.impl;
 
-import com.cyj.piano_backend.bean.po.PianoUserPO;
+import com.cyj.piano_backend.bean.PianoUser;
 import com.cyj.piano_backend.mapper.PianoUserMapper;
 import com.cyj.piano_backend.service.PianoUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class PianoUserServiceImpl implements PianoUserService {
 
     @Override
     @Transactional
-    public void insert(PianoUserPO po) {
+    public void insert(PianoUser po) {
         pianoUserMapper.insert(po);
     }
 

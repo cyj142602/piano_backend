@@ -1,4 +1,4 @@
-package com.cyj.piano_backend.bean.vo;
+package com.cyj.piano_backend.bean;
 
 import lombok.Getter;
 import lombok.Setter;
