@@ -1,0 +1,28 @@
+CREATE TABLE `piano_user` (
+  `ID` varchar(50) NOT NULL,
+  `OPEN_ID` varchar(50) NOT NULL,
+  `NICK_NAME` varchar(50) DEFAULT NULL COMMENT '昵称',
+  `GENDER` int(11) DEFAULT NULL,
+  `PHONE` varchar(50) DEFAULT NULL,
+  `PERMISSION` int(11) DEFAULT NULL,
+  `CREATE_TIME` datetime(6) DEFAULT NULL,
+  `UPDATE_TIME` datetime(6) DEFAULT NULL,
+  `DEL_FLAG` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+CREATE TABLE `piano_student` (
+    `ID` varchar(50) NOT NULL COMMENT '主键',
+    `PIANO_USER_ID` varchar(50) NOT NULL,
+    `STUDENT_NAME` varchar(50) NOT NULL,
+    `GENDER` int(11) NOT NULL,
+    `AGE` int(11) DEFAULT NULL,
+    `PHOTO` varchar(50) DEFAULT NULL,
+    `CREATE_TIME` datetime(6) DEFAULT NULL,
+    `UPDATE_TIME` datetime(6) DEFAULT NULL,
+    `DEL_FLAG` int(11) NOT NULL DEFAULT '0',
+    `NICK_NAME` varchar(50) DEFAULT NULL,
+    `BIRTHDAY` datetime(6) DEFAULT NULL,
+    `CALENDAR` int(11) DEFAULT NULL,
+    PRIMARY KEY (`ID`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
