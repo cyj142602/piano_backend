@@ -1,6 +1,7 @@
 package com.cyj.piano_backend.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import com.cyj.piano_backend.bean.PianoStudent;
 import com.cyj.piano_backend.mapper.PianoStudentMapper;
 import com.cyj.piano_backend.service.PianoStudentService;
@@ -25,7 +26,12 @@ public class PianoStudentServiceImpl implements PianoStudentService {
 
     @Override
     public void saveStudentInfo(PianoStudent pianoStudent) {
-        pianoStudent.setId(IdUtil.fastSimpleUUID());
-        pianoStudentMapper.saveStudentInfo(pianoStudent);
+        String id = pianoStudent.getId();
+        if(StrUtil.hasEmpty(id)){
+            pianoStudent.setId(IdUtil.fastSimpleUUID());
+            pianoStudentMapper.insertStudentInfo(pianoStudent);
+        }else {
+            pianoStudentMapper.updateStudentInfo(pianoStudent);
+        }
     }
 }

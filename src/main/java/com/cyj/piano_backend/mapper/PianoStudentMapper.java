@@ -13,5 +13,7 @@ public interface PianoStudentMapper {
 
     List<PianoStudent> getStudentList(String userId);
 
-    void saveStudentInfo(PianoStudent pianoStudent);
+    void insertStudentInfo(PianoStudent pianoStudent);
+
+    void updateStudentInfo(PianoStudent pianoStudent);
 }

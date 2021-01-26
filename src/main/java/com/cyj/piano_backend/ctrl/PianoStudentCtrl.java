@@ -47,6 +47,7 @@ public class PianoStudentCtrl {
         log.info("添加学生");
         try {
             pianoStudentService.saveStudentInfo(pianoStudent);
+            log.info("添加学生成功");
             return JsonResult.bc_success("");
         } catch (Exception e) {
             e.printStackTrace();

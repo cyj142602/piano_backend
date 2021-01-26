@@ -29,11 +29,40 @@
           and DEL_FLAG = '0'
     </select>
 
-    <insert id="saveStudentInfo" parameterType="com.cyj.piano_backend.bean.PianoStudent">
+    <insert id="insertStudentInfo" parameterType="com.cyj.piano_backend.bean.PianoStudent">
         insert into PIANO_STUDENT(id, piano_user_id, student_name, gender, age, photo, create_time, update_time,
                                   del_flag, nick_name, birthday, calendar)
         values (#{id,jdbcType=VARCHAR}, #{pianoUserId,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR},
                 #{gender,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}, now(), now(), '0',
-                #{nickName,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{calendar,jdbcType=VARCHAR})
+                #{nickName,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{calendar,jdbcType=INTEGER})
     </insert>
+
+    <update id="updateStudentInfo">
+        update PIANO_STUDENT
+        <set>
+            <if test="studentName!=null and studentName != ''">
+                student_name = #{studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="gender!=null">
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="age!=null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="photo!=null and photo != ''">
+                photo = #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName!=null and nickName != ''">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="calendar!=null">
+                calendar = #{calendar,jdbcType=INTEGER},
+            </if>
+            update_time = now()
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

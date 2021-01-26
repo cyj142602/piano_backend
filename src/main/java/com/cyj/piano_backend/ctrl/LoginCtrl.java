@@ -52,7 +52,6 @@ public class LoginCtrl {
             String sessionKey = (String) jsonObject.get("session_key");
             //sessionKey加密存储，并返给小程序端
             String thirdSession = new MD5().digestHex16(sessionKey);
-            redisBaseDao.setString("thirdSession",thirdSession);
             result.put("thirdSession", thirdSession);
             //本小程序中每个用户的唯一id
             String openId = (String) jsonObject.get("openid");
@@ -71,6 +70,7 @@ public class LoginCtrl {
                 po.setOpenId(openId);
                 pianoUserService.insert(po);
             }
+            redisBaseDao.setString(userId,thirdSession);
             result.put("userId", userId);
             log.info("登录成功");
             return new JsonResult<>(200, "登录成功", result);
