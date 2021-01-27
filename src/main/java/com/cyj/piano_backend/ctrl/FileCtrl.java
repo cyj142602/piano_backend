@@ -5,13 +5,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.Arrays;
 
 /**
@@ -85,6 +84,61 @@ public class FileCtrl {
             e.printStackTrace();
             logger.error("照片上传失败！msg = {}", Arrays.toString(e.getStackTrace()));
             return new JsonResult<>(401, "上传失败");
+        }
+    }
+
+    @GetMapping("/readImg")
+    public void readImg(String filePath, HttpServletRequest request, HttpServletResponse response) {
+        FileInputStream in;
+        try {
+            logger.info("预览照片");
+            request.setCharacterEncoding("utf-8");
+            //页面img标签中src中传入的真是图片地址路径
+            String path = request.getParameter("filePath");
+            String filePathEcode = new String(filePath.trim().getBytes(), "UTF-8");
+            response.setContentType("image/jpeg");
+            //图片读取路径
+            in = new FileInputStream("D:/fileUpload/image/" + filePath);
+            // 得到文件大小
+            int i = in.available();
+            //创建存放文件内容的数组
+            byte[] data = new byte[i];
+            in.read(data);
+            in.close();
+            //把图片写出去
+            OutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+            outputStream.write(data);
+            //将缓存区的数据进行输出
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
+
+    @GetMapping("/readVideo")
+    public void readVideo(String filePath, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            logger.info("预览视频");
+            request.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream");
+            response.setHeader("Accept-Ranges", "bytes");
+            FileInputStream fis = new FileInputStream("D:/fileUpload/" + filePath);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            fis.close();
+            bos.close();
+            byte[] buffer = bos.toByteArray();
+            response.setContentLength(buffer.length);
+            response.getOutputStream().write(buffer);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }
