@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyj.piano_backend.mapper.PianoFileMapper">
+
+    <insert id="insert" parameterType="com.cyj.piano_backend.bean.PianoFile">
+        insert into PIANO_FILE(id, file_name, create_time, update_time, del_flag, file_type)
+        values (#{id,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, now(), now(), '0', #{fileType,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectById" resultType="String">
+        select FILE_NAME
+        from PIANO_FILE
+        where ID = #{id,jdbcType=VARCHAR}
+          and DEL_FLAG = '0'
+    </select>
+</mapper>
