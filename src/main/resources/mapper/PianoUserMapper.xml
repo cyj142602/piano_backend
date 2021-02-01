@@ -11,4 +11,8 @@
     <select id="selectByOpenId" resultType="String">
         select ID from PIANO_USER where OPEN_ID = #{openId,jdbcType=VARCHAR} and DEL_FLAG = '0'
     </select>
+
+    <select id="selectByUserId" resultType="Integer">
+        select PERMISSION from PIANO_USER where ID = #{id,jdbcType=VARCHAR} and DEL_FLAG = '0'
+    </select>
 </mapper>

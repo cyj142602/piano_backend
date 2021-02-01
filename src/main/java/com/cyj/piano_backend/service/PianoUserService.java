@@ -12,4 +12,7 @@ public interface PianoUserService {
 
     //查询用户
     String selectByOpenId(String openId);
+
+    //查询用户权限
+    Integer selectByUserId(String id);
 }

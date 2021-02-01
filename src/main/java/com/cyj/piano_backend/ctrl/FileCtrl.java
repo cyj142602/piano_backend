@@ -23,6 +23,7 @@ import java.util.Arrays;
  * @author changyingjie
  */
 @Api(tags = "文件相关")
+@RequestMapping("/file")
 @RestController
 public class FileCtrl {
 

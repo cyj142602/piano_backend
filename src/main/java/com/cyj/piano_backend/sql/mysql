@@ -26,3 +26,13 @@ CREATE TABLE `piano_student` (
     `CALENDAR` int(11) DEFAULT NULL,
     PRIMARY KEY (`ID`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `piano_file` (
+    `ID` varchar(50) NOT NULL COMMENT '主键',
+    `FILE_NAME` varchar(50) COMMENT='文件名',
+    `FILE_TYPE` int(11) COMMENT='文件类型，1照片2视频',
+    `CREATE_TIME` datetime(6) DEFAULT NULL,
+    `UPDATE_TIME` datetime(6) DEFAULT NULL,
+    `DEL_FLAG` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`ID`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件表';

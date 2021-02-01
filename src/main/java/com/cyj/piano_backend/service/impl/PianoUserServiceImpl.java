@@ -26,4 +26,9 @@ public class PianoUserServiceImpl implements PianoUserService {
     public String selectByOpenId(String openId) {
         return pianoUserMapper.selectByOpenId(openId);
     }
+
+    @Override
+    public Integer selectByUserId(String id) {
+        return pianoUserMapper.selectByUserId(id);
+    }
 }
