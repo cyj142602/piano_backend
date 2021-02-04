@@ -3,8 +3,9 @@
 <mapper namespace="com.cyj.piano_backend.mapper.PianoFileMapper">
 
     <insert id="insert" parameterType="com.cyj.piano_backend.bean.PianoFile">
-        insert into PIANO_FILE(id, file_name, create_time, update_time, del_flag, file_type)
-        values (#{id,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, now(), now(), '0', #{fileType,jdbcType=INTEGER})
+        insert into PIANO_FILE(id, STUDENT_ID, file_name, create_time, update_time, del_flag, file_type)
+        values (#{id,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, now(), now(), '0',
+                #{fileType,jdbcType=INTEGER})
     </insert>
 
     <select id="selectById" resultType="String">

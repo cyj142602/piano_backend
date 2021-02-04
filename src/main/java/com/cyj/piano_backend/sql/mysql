@@ -34,5 +34,6 @@ CREATE TABLE `piano_file` (
     `CREATE_TIME` datetime(6) DEFAULT NULL,
     `UPDATE_TIME` datetime(6) DEFAULT NULL,
     `DEL_FLAG` int(11) NOT NULL DEFAULT '0',
+    `STUDENT_ID` varchar(50) COMMENT='关联学生ID',
     PRIMARY KEY (`ID`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件表';

@@ -7,9 +7,9 @@ import com.cyj.piano_backend.bean.PianoFile;
  */
 public interface PianoFileService {
 
-    //新增用户
+    //新增文件
     void insert(PianoFile po);
 
-    //查询用户
+    //查询文件名
     String selectById(String openId);
 }

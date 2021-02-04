@@ -12,4 +12,5 @@ public class PianoFile extends BaseObject {
 
     private String fileName;
     private Integer fileType;
+    private String studentId;
 }

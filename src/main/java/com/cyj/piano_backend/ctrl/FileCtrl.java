@@ -40,7 +40,7 @@ public class FileCtrl {
 
     @ApiOperation(value = "视频上传")
     @PostMapping(value = "/uploadVideo")
-    public JsonResult<String> uploadVideo(@RequestParam("video") MultipartFile file) {
+    public JsonResult<String> uploadVideo(@RequestParam("video") MultipartFile file,@RequestParam String studentId) {
         logger.info("打卡视频开始上传...");
         if (file.isEmpty()) {
             return new JsonResult<>(401, "上传视频不可为空");
@@ -62,6 +62,7 @@ public class FileCtrl {
             pianoFile.setId(fileId);
             pianoFile.setFileName(fileName);
             pianoFile.setFileType(Contants.FILE_TYPE_VIDEO);
+            pianoFile.setStudentId(studentId);
             pianoFileService.insert(pianoFile);
             logger.info("打卡视频上传结束！path={}", path);
             return JsonResult.bc_success(fileId);

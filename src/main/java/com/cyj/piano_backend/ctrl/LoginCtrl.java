@@ -27,6 +27,7 @@ import java.util.Map;
 @RestController
 @Api(tags = "登录接口")
 @Slf4j
+@RequestMapping("/login")
 public class LoginCtrl {
 
     @Autowired
